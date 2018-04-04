@@ -1,0 +1,4 @@
+%{
+  "caffeine": {:hex, :caffeine, "1.2.0", "b1e1cbd2b57807c078011e4631a68f33f52a079d6d92065dd8a6ac3027688604", [:mix], [], "hexpm"},
+  "psi": {:git, "https://github.com/Dzol/psi", "249bb49bea3b03dce8f70b0815e716e0f5015741", [ref: "249bb49bea3b03dce8f70b0815e716e0f5015741"]},
+}

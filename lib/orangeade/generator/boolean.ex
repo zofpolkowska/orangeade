@@ -1,6 +1,6 @@
 defmodule Orangeade.Generator.Boolean do
   @moduledoc """
-  A boolean values generator
+  A boolean values generator {:true, :false, :nil}
   
   
   ## Examples
@@ -26,7 +26,7 @@ defmodule Orangeade.Generator.Boolean do
           :true
         e === 1 ->
           :false
-        true ->
+        e === 2 ->
           :nil
       end
     end

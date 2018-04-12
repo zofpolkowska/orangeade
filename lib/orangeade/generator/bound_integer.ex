@@ -20,7 +20,7 @@ defmodule Orangeade.Generator.BoundInteger do
     cond do
       ei === 0 ->
 	ui *(-1)
-      true ->
+      ei === 1 ->
 	li
     end
   end

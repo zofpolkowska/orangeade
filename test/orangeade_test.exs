@@ -1,7 +1,6 @@
 defmodule OrangeadeTest do
   use ExUnit.Case
   alias Orangeade.Generator.BoundNatural, as: BoundNatural
-  alias Orangeade.Generator.Boolean, as: Boolean
   alias Orangeade.Generator.BoundInteger, as: BoundInteger  
  
   test "API" do
@@ -25,19 +24,6 @@ defmodule OrangeadeTest do
     total = 2_000
     boundintegers = Caffeine.Stream.take(BoundInteger.stream(lower: -100,
 	upper: 100), total)
-    epsilon = 5
     assert abs(total/2 - Enum.count(boundintegers, fn x -> x > 0 end))/total < 0.05
-  end
-
-  test "asserts that each of bools occurence is ALMOST equipotencial" do
-    total = 50_000
-    
-    booleans = Caffeine.Stream.take(Boolean.stream(), total)
-    trues = Enum.count(Enum.filter(booleans, fn e -> e == :true end))
-    falses = Enum.count(Enum.filter(booleans, fn e -> e == :false end))
-    nils = Enum.count(Enum.filter(booleans, fn e -> e == :nil end))
-    assert trues/total > 0.30
-    assert falses/total > 0.30
-    assert nils/total > 0.30
   end
 end

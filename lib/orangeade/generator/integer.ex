@@ -1,4 +1,4 @@
-defmodule Orangeade.Generator.Integer do
+defmodule Orangeade.Generator.BigInteger do
   def stream do
      alias Psi.LinearCongruentialGenerator, as: LCG
     

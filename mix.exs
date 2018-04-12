@@ -20,6 +20,7 @@ defmodule Orangeade.MixProject do
   defp deps do
     [
       {:caffeine, "~> 1.2"},
+      {:stream_data, "~> 0.4"},
       {:psi, git: "https://github.com/Dzol/psi", ref: "249bb49bea3b03dce8f70b0815e716e0f5015741"}
     ]
   end

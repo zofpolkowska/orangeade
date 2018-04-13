@@ -12,5 +12,8 @@ defmodule OrangeadeTest do
     assert Orangeade.Generator.BoundNatural.__info__(:functions) == [
              stream: 1
            ]
+    assert Orangeade.Generator.PrintableASCIICharacter.__info__(:functions) == [
+             stream: 0
+           ]
   end
 end

@@ -1,4 +1,18 @@
 defmodule Orangeade.Generator.BoundInteger do
+  @moduledoc """
+  Provides a function to generate a limited stream of integers
+  """
+  
+  @doc """
+  Generates a limited stream of integers
+
+  # Example
+  iex> Caffeine.Stream.take(                                        
+  ...> Orangeade.Generator.BoundInteger.stream(lower: -200, upper: 200),
+  ...> 14)                                                              
+  [1, -12, 19, -110, 69, -120, 183, -18, 129, -44, 131, -54, 93, -48]
+
+  """
   def stream(lower: i, upper: j) do
     l = Orangeade.Generator.BoundNatural.stream(limit: abs(i))
     u = Orangeade.Generator.BoundNatural.stream(limit: j)

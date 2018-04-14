@@ -39,13 +39,13 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
 
   defp drain_chars(n, charlist_stream) do
     {Caffeine.Stream.take(charlist_stream, n),
-     cut(n, charlist_stream)}
+     reduce_stream(n, charlist_stream)}
   end
 
-  defp cut(0, reduced_charlist_stream) do
-    reduced_charlist_stream
+  defp reduce_stream(0, reduced_stream) do
+    reduced_stream
   end
-  defp cut(i, charlist_stream) do
-    cut(i - 1, Caffeine.Stream.tail(charlist_stream))
+  defp reduce_stream(i, stream) do
+    reduce_stream(i - 1, Caffeine.Stream.tail(stream))
   end
 end

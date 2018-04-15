@@ -35,5 +35,8 @@ defmodule OrangeadeTest do
     assert Orangeade.Generator.BooleanAndNil.__info__(:functions) == [
       stream: 0
     ]
+    assert Orangeade.Generator.Term.__info__(:functions) == [
+      stream: 0
+    ]
   end
 end

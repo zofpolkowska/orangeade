@@ -39,7 +39,7 @@ defmodule Orangeade.Generator.Fun do
       fn e -> f(Enum.at(Kernel.__info__(:functions), e)) end)
   end
 
-  @doc"""
+  @doc """
   Generates a stream of Kernel functions with identifiers
 
   # Example

@@ -1,4 +1,4 @@
-defmodule Orangeade.Generator.BoundNatural.Tests do
+defmodule Orangeade.Generator.BoundNaturalTest do
   use ExUnit.Case, async: true
   use ExUnitProperties
   import Orangeade.Generator.BoundNatural, only: [stream: 1]

@@ -1,12 +1,10 @@
-defmodule Orangeade.Generator.BigNatural.Tests do
+defmodule Orangeade.Generator.BigNaturalTest do
   use ExUnit.Case, async: true
-  use ExUnitProperties
   import Orangeade.Generator.BigNatural, only: [stream: 0]
 
   test "check 5 first generated elements" do
     generated =
-      stream()
-      |> Caffeine.Stream.take(5)
+      Caffeine.Stream.take(stream(), 5)
 
     assert generated == [
              1,

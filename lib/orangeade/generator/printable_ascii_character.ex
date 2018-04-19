@@ -17,7 +17,7 @@ defmodule Orangeade.Generator.PrintableASCIICharacter do
       '!he@E@?l{$'
 
   """
-  @spec stream() :: nonempty_improper_list(non_neg_integer, (() -> non_neg_integer))
+  @spec stream() :: Caffeine.Stream.t()
   def stream do
     Caffeine.Stream.map(BoundNatural.stream(limit: length()),
       &to_number_between_bounds/1)
@@ -32,11 +32,11 @@ defmodule Orangeade.Generator.PrintableASCIICharacter do
   end
 
   defp lower_bound do
-    0x20
+    ?\s
   end
 
   defp upper_bound do
-    0x7E
+    ?~
   end
 end
 

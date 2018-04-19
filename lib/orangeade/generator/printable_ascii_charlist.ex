@@ -22,8 +22,7 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
       '=^IVK>#<;<mBar#:CnC', '0m\\?6GLeXs$%:c']
 
   """
-  @spec stream([max_word_length: non_neg_integer]) ::
-          nonempty_improper_list(list, (() -> list))
+  @spec stream([max_word_length: non_neg_integer]) :: Caffeine.Stream.t()
   def stream(max_word_length: l) do
     make_stream(length: BoundNatural.stream(limit: l),
       fill: PrintableASCIICharacter.stream())

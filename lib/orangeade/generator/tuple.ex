@@ -27,7 +27,7 @@ defmodule Orangeade.Generator.Tuple do
   ]
 
   """
-  #@spec stream(S.t,S.t) :: S.t
+  
   def stream(k, v) do
     e = heads(k, v)
     rest = fn ->

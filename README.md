@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lambdaacademy/2018.03_elixir.svg?branch=master)](https://travis-ci.org/lambdaacademy/2018.03_elixir)
+
 # Orangeade
 
 A collection of data generators like those seen in property-based testing.

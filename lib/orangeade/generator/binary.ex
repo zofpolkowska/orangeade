@@ -17,8 +17,7 @@ defmodule Orangeade.Generator.Binary do
       [<<1>>, "|\e", <<14, 197, 240, 127>>, "", <<162, 201, 164, 35>>]
 
   """
-  @spec stream(byte_size_limit: non_neg_integer) ::
-          nonempty_improper_list(binary, (() -> binary))
+  @spec stream(byte_size_limit: non_neg_integer) :: Caffeine.Stream.t()
   def stream(byte_size_limit: l) do
     make_stream(byte_size: BoundNatural.stream(limit: l),
       fill: BoundNatural.stream(limit: 256))

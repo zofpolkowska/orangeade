@@ -18,8 +18,7 @@ defmodule Orangeade.Generator.ASCIIString do
       "$}v", "ul?B;(GLGZ_J9Ha>!B", "%8#T]6q^i", "D[hY"]
 
   """
-  @spec stream([max_word_length: non_neg_integer]) ::
-          nonempty_improper_list(bitstring, (() -> bitstring))
+  @spec stream([max_word_length: non_neg_integer]) :: Caffeine.Stream.t()
   def stream(max_word_length: l) do
     Caffeine.Stream.map(PrintableASCIICharlist.stream(max_word_length: l),
       &List.to_string/1)

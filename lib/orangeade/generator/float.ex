@@ -21,7 +21,7 @@ defmodule Orangeade.Generator.Float do
 
   """
   @spec stream([limit: non_neg_integer, fraction_digits_limit: non_neg_integer]) ::
-          nonempty_improper_list(float, (() -> float))
+          Caffeine.Stream.t()
   def stream(limit: l, fraction_digits_limit: fl) do
     make_stream(integer_digits: Integer.stream(limit: l),
       fraction_digits: get_floats(fraction_digits_limit: fl))

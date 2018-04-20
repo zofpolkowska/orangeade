@@ -17,8 +17,7 @@ defmodule Orangeade.Generator.BooleanAndNil do
       [false, false, true, true, true, true, false, nil, false, true]
 
   """
-  @spec stream() ::
-          nonempty_improper_list(true | false | nil, (() -> true | false | nil))
+  @spec stream() :: Caffeine.Stream.t()
   def stream do
     Caffeine.Stream.map(BoundNatural.stream(limit: 3), &to_boolean_or_nil/1)
   end

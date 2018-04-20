@@ -17,8 +17,7 @@ defmodule Orangeade.Generator.Integer do
       [-1, 412, -419, 710, -269, 520, -983, 618, -929, 44]
 
   """
-  @spec stream([limit: non_neg_integer]) ::
-          nonempty_improper_list(integer, (() -> integer))
+  @spec stream([limit: non_neg_integer]) :: Caffeine.Stream.t()
   def stream(limit: i) do
     make_stream(sign: BoundNatural.stream(limit: 2),
       fill: BoundNatural.stream(limit: i))

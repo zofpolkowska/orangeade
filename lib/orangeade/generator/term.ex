@@ -36,7 +36,7 @@ defmodule Orangeade.Generator.Term do
       ]
 
   """
-  @spec stream() :: nonempty_improper_list(term, (() -> term))
+  @spec stream() :: Caffeine.Stream.t()
   def stream do
     number_of_generators = 8
     streams_list = [

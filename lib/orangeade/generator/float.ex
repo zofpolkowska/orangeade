@@ -13,7 +13,7 @@ defmodule Orangeade.Generator.Float do
   ## Examples
 
       iex(1)> s = Orangeade.Generator.Float.stream(limit: 1000, fraction_digits_limit: 5)
-      [-0.99999 | #Function<1.103330561/0 in Orangeade.Generator.Float.make_stream/1>]
+      [-0.99999 | #Function<1.103330561/0 in Orangeade.Generator.Float.do_stream/1>]
 
       iex(2)> Caffeine.Stream.take(s, 10)
       [-0.99999, 412.56412, -418.88581, 710.2971, -268.04731, 520.9352, -982.86017,
@@ -23,20 +23,22 @@ defmodule Orangeade.Generator.Float do
   @spec stream([limit: non_neg_integer, fraction_digits_limit: non_neg_integer]) ::
           Caffeine.Stream.t()
   def stream(limit: l, fraction_digits_limit: fl) do
-    make_stream(integer_digits: Integer.stream(limit: l),
-      fraction_digits: get_floats(fraction_digits_limit: fl))
+    do_stream(integer_digits: Integer.stream(limit: l),
+      fraction_digits: create_fractions(fraction_digits_limit: fl))
   end
 
-  defp make_stream(integer_digits: [integer | next_integer],
-    fraction_digits: [fraction | next_fraction]) do
+  defp do_stream(integer_digits: integer_stream,
+    fraction_digits: fraction_stream) do
     rest = fn ->
-      make_stream(integer_digits: next_integer.(),
-        fraction_digits: next_fraction.())
+      do_stream(integer_digits: Caffeine.Stream.tail(integer_stream),
+        fraction_digits: Caffeine.Stream.tail(fraction_stream))
     end
-    Caffeine.Stream.construct(build_float(integer, fraction), rest)
+    float = build_float(Caffeine.Stream.head(integer_stream),
+      Caffeine.Stream.head(fraction_stream))
+    Caffeine.Stream.construct(float, rest)
   end
 
-  defp get_floats(fraction_digits_limit: l) do
+  defp create_fractions(fraction_digits_limit: l) do
     f = fn x -> x / power_of_ten(index: l) end
     Caffeine.Stream.map(BoundNatural.stream(limit: power_of_ten(index: l)), f)
   end

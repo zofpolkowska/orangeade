@@ -11,7 +11,7 @@ defmodule Orangeade.Generator.Binary do
   ## Examples
 
       iex(1)> s = Orangeade.Generator.Binary.stream(byte_size_limit: 5)
-      [<<1>> | #Function<0.77151006/0 in Orangeade.Generator.Binary.make_stream/1>]
+      [<<1>> | #Function<0.77151006/0 in Orangeade.Generator.Binary.do_stream/1>]
 
       iex(2)> Caffeine.Stream.take(s, 5)
       [<<1>>, "|\e", <<14, 197, 240, 127>>, "", <<162, 201, 164, 35>>]
@@ -19,17 +19,19 @@ defmodule Orangeade.Generator.Binary do
   """
   @spec stream(byte_size_limit: non_neg_integer) :: Caffeine.Stream.t()
   def stream(byte_size_limit: l) do
-    make_stream(byte_size: BoundNatural.stream(limit: l),
+    do_stream(byte_size: BoundNatural.stream(limit: l),
       fill: BoundNatural.stream(limit: 256))
   end
 
-  defp make_stream(byte_size: [byte_size | next_byte_size],
+  defp do_stream(byte_size: byte_size_stream,
     fill: number_stream) do
-    {number_list, reduced_number_stream} = drain_numbers(byte_size, number_stream)
+    {number_list, reduced_number_stream} =
+      drain_numbers(Caffeine.Stream.head(byte_size_stream), number_stream)
     rest = fn ->
-      make_stream(byte_size: next_byte_size.(), fill: reduced_number_stream)
+      do_stream(byte_size: Caffeine.Stream.tail(byte_size_stream),
+        fill: reduced_number_stream)
     end
-    Caffeine.Stream.construct(get_binary(number_list), rest)
+    Caffeine.Stream.construct(list_to_binary(number_list), rest)
   end
 
   defp drain_numbers(n, number_stream) do
@@ -44,7 +46,7 @@ defmodule Orangeade.Generator.Binary do
     reduce_stream(i - 1, Caffeine.Stream.tail(stream))
   end
 
-  defp get_binary(list) do
-    :erlang.list_to_binary(list)
+  defp list_to_binary(list) do
+    IO.iodata_to_binary(list)
   end
 end

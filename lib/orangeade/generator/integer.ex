@@ -11,7 +11,7 @@ defmodule Orangeade.Generator.Integer do
   ## Examples
 
       iex(1)> s = Orangeade.Generator.Integer.stream(limit: 1000)
-      [-1 | #Function<0.132496296/0 in Orangeade.Generator.Integer.make_stream/1>]
+      [-1 | #Function<0.132496296/0 in Orangeade.Generator.Integer.do_stream/1>]
 
       iex(2)> Caffeine.Stream.take(s, 10)
       [-1, 412, -419, 710, -269, 520, -983, 618, -929, 44]
@@ -19,19 +19,22 @@ defmodule Orangeade.Generator.Integer do
   """
   @spec stream([limit: non_neg_integer]) :: Caffeine.Stream.t()
   def stream(limit: i) do
-    make_stream(sign: BoundNatural.stream(limit: 2),
+    do_stream(sign: BoundNatural.stream(limit: 2),
       fill: BoundNatural.stream(limit: i))
   end
 
-  defp make_stream(sign: [sign_index | next_sign_index],
-    fill: [number | next_number]) do
+  defp do_stream(sign: sign_index_stream,
+    fill: number_stream) do
     rest = fn ->
-      make_stream(sign: next_sign_index.(), fill: next_number.())
+      do_stream(sign: Caffeine.Stream.tail(sign_index_stream),
+        fill: Caffeine.Stream.tail(number_stream))
     end
-    Caffeine.Stream.construct(get_sign(sign_index) * number, rest)
+    sign_index = Caffeine.Stream.head(sign_index_stream)
+    number = Caffeine.Stream.head(number_stream)
+    Caffeine.Stream.construct(create_sign(sign_index) * number, rest)
   end
 
-  defp get_sign(n) do
+  defp create_sign(n) do
     case n do
       0 -> 1
       1 -> -1

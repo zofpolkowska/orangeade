@@ -53,10 +53,12 @@ defmodule Orangeade.Generator.Term do
       fill: streams_list)
   end
 
-  defp do_stream(data_type: [type | next_type], fill: streams_list) do
-    {head, reduced_streams_list} = drain_streams_list(type, streams_list)
+  defp do_stream(data_type: type_stream, fill: streams_list) do
+    {head, reduced_streams_list} =
+      drain_streams_list(Caffeine.Stream.head(type_stream), streams_list)
     rest = fn ->
-      do_stream(data_type: next_type.(), fill: reduced_streams_list)
+      do_stream(data_type: Caffeine.Stream.tail(type_stream),
+        fill: reduced_streams_list)
     end
     Caffeine.Stream.construct(head, rest)
   end

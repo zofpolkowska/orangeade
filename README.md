@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lambdaacademy/2018.03_elixir.svg?branch=master)](https://travis-ci.org/lambdaacademy/2018.03_elixir)
+[![Build Status](https://travis-ci.org/lambdaacademy/orangeade.svg?branch=master)](https://travis-ci.org/lambdaacademy/orangeade)
 
 # Orangeade
 

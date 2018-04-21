@@ -1,4 +1,4 @@
-defmodule Orangeade.Generator.Boolean do
+defmodule Orangeade.Generator.Logical do
   @moduledoc """
   A boolean values generator {:true, :false, :nil}
   

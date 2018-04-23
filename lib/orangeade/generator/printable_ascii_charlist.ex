@@ -13,7 +13,7 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
 
       iex(1)> s = Orangeade.Generator.PrintableASCIICharlist.stream(max_word_length: 30)
       ['!' |
-      #Function<0.59794914/0 in Orangeade.Generator.PrintableASCIICharlist.make_stream/1>]
+      #Function<0.59794914/0 in Orangeade.Generator.PrintableASCIICharlist.do_stream/1>]
 
       iex(2)> Caffeine.Stream.take(s, 10)
       ['!', 'he@E@?l{$w@7$O:!2[:-LI', 'BG@[&!^7:gp]f% W4S8qjgve,s@#$',
@@ -24,14 +24,16 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
   """
   @spec stream([max_word_length: non_neg_integer]) :: Caffeine.Stream.t()
   def stream(max_word_length: l) do
-    make_stream(length: BoundNatural.stream(limit: l),
+    do_stream(length: BoundNatural.stream(limit: l),
       fill: PrintableASCIICharacter.stream())
   end
 
-  defp make_stream(length: [length | next_length], fill: charlist_stream) do
-    {head, reduced_charlist_stream} = drain_chars(length, charlist_stream)
+  defp do_stream(length: length_stream, fill: charlist_stream) do
+    {head, reduced_charlist_stream} =
+      drain_chars(Caffeine.Stream.head(length_stream), charlist_stream)
     rest = fn ->
-     make_stream(length: next_length.(), fill: reduced_charlist_stream)
+      do_stream(length: Caffeine.Stream.tail(length_stream),
+        fill: reduced_charlist_stream)
     end
     Caffeine.Stream.construct(head, rest)
   end

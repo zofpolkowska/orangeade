@@ -18,19 +18,19 @@ defmodule Orangeade.Generator.Tuple do
         #Function<0.103631357/0 in Orangeade.Generator.Tuple.stream/1>
       ]
   iex> Caffeine.Stream.take(s, 5)                         
-      [{false, '!', 1}, {3, 'h', false}, {nil, 'e', 0}, {5, '@', nil}, {nil, 'E', 3}]
+      [{false, '!', 1}, {false, 'h', 3}, {nil, 'e', 0}, {nil, '@', 5}, {nil, 'E', 3}]
   """
   def stream(args: l) do
-    {h, t} = parts(l, {}, [])
+    {h, t} = parts(l, [], [])
     rest = fn ->
       stream(args: t) end
     
-    Caffeine.Stream.construct(h, rest)
+    Caffeine.Stream.construct(List.to_tuple(h), rest)
   end
 
-  defp parts([], heads, tails), do: {heads, tails}
+  defp parts([], heads, tails), do: {heads, Enum.reverse(tails)}
   defp parts([h|t], heads, tails) do
-    parts(t, Tuple.append(heads, fst(h)), [Caffeine.Stream.tail(h)|tails])
+    parts(t, [fst(h)| heads], [Caffeine.Stream.tail(h)|tails])
   end
 
   defp fst(s) do

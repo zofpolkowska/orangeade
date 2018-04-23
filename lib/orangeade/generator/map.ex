@@ -15,8 +15,8 @@ defmodule Orangeade.Generator.Map do
   iex> Caffeine.Stream.take(s, 3)
       [
         %{false: '!'},
-        %{false => 'h', 'e' => nil},
-        %{nil => '@', true => 'l', '?' => false, 'E' => nil, 'w' => nil, '{' => false}
+        %{false => 'h', nil => 'e'},
+        %{nil => '@', true => 'l', false => 'i', nil => 'E', nil => 'W', false => '}'}
       ]
   """
   def stream(keys: k, values: v, limit: l) do
@@ -43,7 +43,7 @@ defmodule Orangeade.Generator.Map do
      rest(args, len)}
   end
     
-    defp rest(args, 0), do: args
+  defp rest(args, 0), do: args
   defp rest(args, len) do
     rest(Caffeine.Stream.tail(args), len - 1)
   end

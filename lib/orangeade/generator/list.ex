@@ -1,15 +1,12 @@
 defmodule Orangeade.Generator.List do
-  @moduledoc
-  """
+  @moduledoc"""
   Provides a function to generate uniform lists
   """
 
-  @doc
-  """
+  @doc"""
   Generates a stream of uniform lists 
-  (values for lists are genereted by whichever stream from Orangeade.Generator)
 
-  ## Example
+  # Example
 
   iex> args = Orangeade.Generator.Printable.ASCII.stream()          
        [33 | #Function<1.23635164/0 in Caffeine.Stream.map/2>]
@@ -17,6 +14,7 @@ defmodule Orangeade.Generator.List do
        ['!' | #Function<0.90383687/0 in Orangeade.Generator.List.stream/2>]
   iex> Caffeine.Stream.take(lists, 6)                                
        ['!', 'he', '@E@?l{$w@', [], '7$O:!2[:-', []]
+
   """
   def stream(args: a, limit: l) do
     stream(a, Orangeade.Generator.BoundNatural.stream(limit: l))

@@ -1,8 +1,8 @@
-defmodule Orangeade.Generator.PrintableASCIITest do
+defmodule Orangeade.Generator.PrintableASCIICharacterTest do
   use ExUnit.Case
   test "only printable ascii characters are generated" do
     s = Caffeine.Stream.take(                    
-      Orangeade.Generator.Printable.ASCII.stream(),
+      Orangeade.Generator.PrintableASCIICharacter.stream(),
       1_000)
     assert List.ascii_printable?(s)
   end

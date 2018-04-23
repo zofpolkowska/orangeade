@@ -3,8 +3,7 @@ defmodule Orangeade.Generator.BigNaturalTest do
   import Orangeade.Generator.BigNatural, only: [stream: 0]
 
   test "check 5 first generated elements" do
-    generated =
-      Caffeine.Stream.take(stream(), 5)
+    generated = Caffeine.Stream.take(stream(), 5)
 
     assert generated == [
              1,

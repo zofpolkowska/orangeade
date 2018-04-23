@@ -9,7 +9,7 @@ defmodule Orangeade.Generator.Float do
   @doc """
   Given a limit and a fraction digits limit creates a stream of floats
   between the limit and the negative limit.
-  
+
   ## Examples
 
       iex(1)> s = Orangeade.Generator.Float.stream(limit: 1000, fraction_digits_limit: 5)
@@ -20,21 +20,29 @@ defmodule Orangeade.Generator.Float do
       618.47618, -928.78071, 44.83044]
 
   """
-  @spec stream([limit: non_neg_integer, fraction_digits_limit: non_neg_integer]) ::
+  @spec stream(limit: non_neg_integer, fraction_digits_limit: non_neg_integer) ::
           Caffeine.Stream.t()
   def stream(limit: l, fraction_digits_limit: fl) do
-    do_stream(integer_digits: Integer.stream(limit: l),
-      fraction_digits: create_fractions(fraction_digits_limit: fl))
+    do_stream(
+      integer_digits: Integer.stream(limit: l),
+      fraction_digits: create_fractions(fraction_digits_limit: fl)
+    )
   end
 
-  defp do_stream(integer_digits: integer_stream,
-    fraction_digits: fraction_stream) do
+  defp do_stream(
+         integer_digits: integer_stream,
+         fraction_digits: fraction_stream
+       ) do
     rest = fn ->
-      do_stream(integer_digits: Caffeine.Stream.tail(integer_stream),
-        fraction_digits: Caffeine.Stream.tail(fraction_stream))
+      do_stream(
+        integer_digits: Caffeine.Stream.tail(integer_stream),
+        fraction_digits: Caffeine.Stream.tail(fraction_stream)
+      )
     end
-    float = build_float(Caffeine.Stream.head(integer_stream),
-      Caffeine.Stream.head(fraction_stream))
+
+    float =
+      build_float(Caffeine.Stream.head(integer_stream), Caffeine.Stream.head(fraction_stream))
+
     Caffeine.Stream.construct(float, rest)
   end
 

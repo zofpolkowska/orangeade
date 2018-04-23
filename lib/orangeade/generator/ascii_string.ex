@@ -7,7 +7,7 @@ defmodule Orangeade.Generator.ASCIIString do
 
   @doc """
   Given a max word length creates a stream of ascii strings.
-  
+
   ## Examples
 
       iex(1)> s = Orangeade.Generator.ASCIIString.stream(max_word_length: 20)
@@ -18,9 +18,8 @@ defmodule Orangeade.Generator.ASCIIString do
       "$}v", "ul?B;(GLGZ_J9Ha>!B", "%8#T]6q^i", "D[hY"]
 
   """
-  @spec stream([max_word_length: non_neg_integer]) :: Caffeine.Stream.t()
+  @spec stream(max_word_length: non_neg_integer) :: Caffeine.Stream.t()
   def stream(max_word_length: l) do
-    Caffeine.Stream.map(PrintableASCIICharlist.stream(max_word_length: l),
-      &List.to_string/1)
+    Caffeine.Stream.map(PrintableASCIICharlist.stream(max_word_length: l), &List.to_string/1)
   end
 end

@@ -21,7 +21,7 @@ defmodule Orangeade.Generator.Term do
       iex(1)> s = Orangeade.Generator.Term.stream
       ['!' | #Function<0.35028165/0 in Orangeade.Generator.Term.do_stream/1>]
 
-      iex(2)> Caffeine.Stream.take(s, 10) 
+      iex(2)> Caffeine.Stream.take(s, 10)
       [
         '!',
         <<1>>,
@@ -39,27 +39,35 @@ defmodule Orangeade.Generator.Term do
   @spec stream() :: Caffeine.Stream.t()
   def stream do
     number_of_generators = 8
+
     streams_list = [
-      PrintableASCIICharacter.stream,
+      PrintableASCIICharacter.stream(),
       PrintableASCIICharlist.stream(max_word_length: 40),
       ASCIIAtom.stream(max_word_length: 20),
       ASCIIString.stream(max_word_length: 40),
       Binary.stream(byte_size_limit: 20),
-      Integer.stream(limit: 100000),
-      Float.stream(limit: 100000, fraction_digits_limit: 5),
-      BooleanAndNil.stream
+      Integer.stream(limit: 100_000),
+      Float.stream(limit: 100_000, fraction_digits_limit: 5),
+      BooleanAndNil.stream()
     ]
-    do_stream(data_type: BoundNatural.stream(limit: number_of_generators),
-      fill: streams_list)
+
+    do_stream(
+      data_type: BoundNatural.stream(limit: number_of_generators),
+      fill: streams_list
+    )
   end
 
   defp do_stream(data_type: type_stream, fill: streams_list) do
     {head, reduced_streams_list} =
       drain_streams_list(Caffeine.Stream.head(type_stream), streams_list)
+
     rest = fn ->
-      do_stream(data_type: Caffeine.Stream.tail(type_stream),
-        fill: reduced_streams_list)
+      do_stream(
+        data_type: Caffeine.Stream.tail(type_stream),
+        fill: reduced_streams_list
+      )
     end
+
     Caffeine.Stream.construct(head, rest)
   end
 

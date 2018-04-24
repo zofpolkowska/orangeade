@@ -11,16 +11,16 @@ defmodule Orangeade.Generator.List do
 
   ## Examples
 
-      iex(1)> s = Orangeade.Generator.List.stream
+      iex(1)> s = Orangeade.Generator.List.stream(fill: Orangeade.Generator.Integer.stream)
       [[-1] | #Function<0.40676257/0 in Orangeade.Generator.List.do_stream/1>]
 
-      iex(2)> Caffeine.Stream.take(s, 10) 
+      iex(2)> Caffeine.Stream.take(s, 5) 
       [
       [-1],
       [56412, -11419],
-      [29710, -95269, 93520, -13983],
+      [29710, -95269, 93520, -13983, 47618, -21929, 83044, -92931, 66454],
       [],
-      [47618, -21929, 83044, -92931]
+      [-18093, 85048, -28455, 47658, -89617, 92652, -63083, 59646, -50325]
       ]
 
   """

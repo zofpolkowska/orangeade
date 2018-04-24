@@ -20,7 +20,9 @@ defmodule Orangeade.Generator.BigInteger do
   -8155322449589351496]
 
   """
-  @spec stream() :: nonempty_improper_list(integer, (() -> integer))
+
+  @spec stream() :: Caffeine.Stream.t()
+  
   def stream do
     alias Psi.LinearCongruentialGenerator, as: LCG
     

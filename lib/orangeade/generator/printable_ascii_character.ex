@@ -13,6 +13,9 @@ defmodule Orangeade.Generator.PrintableASCIICharacter do
   '!he@E@?l{$w@7$O:!2[:-LIBG@[&!^7:gp]f% W4S8qjgve,s@#$}vul?B;(GLGZ_J9Ha>!B%8#T]6q^iD[hY"kJM\\-8u4?,-J_:'
 
   """
+
+  @spec stream() :: Caffeine.Stream.t()
+  
   def stream do
     alias Psi.LinearCongruentialGenerator, as: LCG
     

@@ -16,6 +16,9 @@ defmodule Orangeade.Generator.List do
        ['!', 'he', '@E@?l{$w@', [], '7$O:!2[:-', []]
 
   """
+  
+  @spec stream([args: Caffeine.Stream.t(), limit: non_neg_integer]) :: Ceffeine.Stream.t()
+
   def stream(args: a, limit: l) do
     stream(a, Orangeade.Generator.BoundNatural.stream(limit: l))
   end

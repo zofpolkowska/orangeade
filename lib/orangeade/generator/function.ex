@@ -28,6 +28,9 @@ defmodule Orangeade.Generator.Function do
       '!'
 
   """
+  
+  @spec stream([arity: non_neg_integer, return: Caffeine.Stream.t()]) :: Caffeine.Stream.t()
+  
   def stream(arity: a, return: r) do
     function = f(a, fst(r))
     rest = fn ->

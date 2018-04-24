@@ -13,6 +13,9 @@ defmodule Orangeade.Generator.BoundInteger do
   [1, -12, 19, -110, 69, -120, 183, -18, 129, -44, 131, -54, 93, -48]
 
   """
+  
+  @spec stream([lower: integer, upper: integer]) :: Caffeine.Stream.t()
+  
   def stream(lower: i, upper: j) do
     l = Orangeade.Generator.BoundNatural.stream(limit: abs(i))
     u = Orangeade.Generator.BoundNatural.stream(limit: j)

@@ -14,6 +14,9 @@ defmodule Orangeade.Generator.Logical do
       false, false, true, nil, false, false, false, false, nil, true, true, ...]
 
   """
+
+  @spec stream() :: Caffeine.Stream.t()
+  
   def stream do
     alias Orangeade.Generator.BoundNatural, as: BoundNatural
     BoundNatural.stream(limit: 3)

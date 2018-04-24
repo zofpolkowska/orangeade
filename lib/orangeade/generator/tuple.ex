@@ -20,6 +20,9 @@ defmodule Orangeade.Generator.Tuple do
   iex> Caffeine.Stream.take(s, 5)                         
       [{false, '!', 1}, {false, 'h', 3}, {nil, 'e', 0}, {nil, '@', 5}, {nil, 'E', 3}]
   """
+
+  @spec stream([args: list(Caffeine.Stream.t())]) :: Caffeine.Stream.t()
+  
   def stream(args: l) do
     {h, t} = parts(l, [], [])
     rest = fn ->

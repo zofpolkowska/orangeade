@@ -19,6 +19,9 @@ defmodule Orangeade.Generator.Map do
         %{nil => '@', true => 'l', false => 'i', nil => 'E', nil => 'W', false => '}'}
       ]
   """
+
+  @spec stream([keys: Caffeine.Stream.t(), values: Caffeine.Stream.t(), limit: non_neg_integer]) :: Caffeine.Stream.t()
+  
   def stream(keys: k, values: v, limit: l) do
     stream(k, v, Orangeade.Generator.BoundNatural.stream(limit: l))
   end

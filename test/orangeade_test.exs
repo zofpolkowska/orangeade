@@ -58,5 +58,9 @@ defmodule OrangeadeTest do
     assert Orangeade.Generator.List.__info__(:functions) == [
              stream: 1
            ]
+
+    assert Orangeade.Generator.Tuple.__info__(:functions) == [
+             stream: 1
+           ]
   end
 end

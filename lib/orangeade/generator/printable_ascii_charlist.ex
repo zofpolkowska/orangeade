@@ -7,11 +7,11 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
   alias Orangeade.Generator.PrintableASCIICharacter
 
   @doc """
-  Creates a stream of ASCII charlists.
+  Creates a stream of ASCII charlists of default length of 30.
 
   ## Examples
 
-      iex(1)> s = Orangeade.Generator.PrintableASCIICharlist.stream(max_word_length: 30)
+      iex(1)> s = Orangeade.Generator.PrintableASCIICharlist.stream()
       ['!' |
       #Function<0.59794914/0 in Orangeade.Generator.PrintableASCIICharlist.do_stream/1>]
 
@@ -20,6 +20,24 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
       '}vul?B;(GLGZ_J9Ha>!B', '%8#T]6q^iD[hY"kJM\\-8u4?,-J_:W',
       'V/L=Z]Pi$}deD-.a>wR-', '@u\\O>/0c&Itkh', '!h=rg2/N9r{81&}"74',
       '=^IVK>#<;<mBar#:CnC', '0m\\?6GLeXs$%:c']
+
+  """
+  @spec stream() :: Caffeine.Stream.t()
+  def stream do
+    stream(max_word_length: 30)
+  end
+
+  @doc """
+  Creates a stream of ASCII charlists of given length.
+
+  ## Examples
+
+     iex(1)> s = Orangeade.Generator.PrintableASCIICharlist.stream(max_word_length: 5)
+     ['!' |
+     #Function<0.59794914/0 in Orangeade.Generator.PrintableASCIICharlist.do_stream/1>]
+
+     iex(2)> Caffeine.Stream.take(s, 10)
+     ['!', 'he', '@E@?', [], 'l{$w', [], '@7$', 'O:!', '2[:-', 'LIBG']
 
   """
   @spec stream(max_word_length: non_neg_integer) :: Caffeine.Stream.t()

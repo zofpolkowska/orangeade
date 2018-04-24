@@ -1,4 +1,4 @@
-defmodule ASCIIStringTest do
+defmodule Orangeade.Generator.ASCIIStringTest do
   use ExUnit.Case
   alias Orangeade.Generator.ASCIIString
 

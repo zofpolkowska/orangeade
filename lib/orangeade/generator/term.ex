@@ -31,8 +31,8 @@ defmodule Orangeade.Generator.Term do
         33,
         false,
         :!,
-        'he@E@?l{$w@7',
-        <<124, 27, 14, 197, 240, 127, 162, 201, 164, 35, 118, 13>>
+        'he@E@?l{$w@7$O:!2[:-LI',
+        <<124, 27, 14, 197>>
       ]
 
   """
@@ -42,12 +42,12 @@ defmodule Orangeade.Generator.Term do
 
     streams_list = [
       PrintableASCIICharacter.stream(),
-      PrintableASCIICharlist.stream(max_word_length: 40),
-      ASCIIAtom.stream(max_word_length: 20),
-      ASCIIString.stream(max_word_length: 40),
-      Binary.stream(byte_size_limit: 20),
-      Integer.stream(limit: 100_000),
-      Float.stream(limit: 100_000, fraction_digits_limit: 5),
+      PrintableASCIICharlist.stream(),
+      ASCIIAtom.stream(),
+      ASCIIString.stream(),
+      Binary.stream(),
+      Integer.stream(),
+      Float.stream(),
       BooleanAndNil.stream()
     ]
 

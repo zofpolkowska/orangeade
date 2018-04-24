@@ -18,26 +18,32 @@ defmodule OrangeadeTest do
            ]
 
     assert Orangeade.Generator.PrintableASCIICharlist.__info__(:functions) == [
+             stream: 0,
              stream: 1
            ]
 
     assert Orangeade.Generator.ASCIIString.__info__(:functions) == [
+             stream: 0,
              stream: 1
            ]
 
     assert Orangeade.Generator.ASCIIAtom.__info__(:functions) == [
+             stream: 0,
              stream: 1
            ]
 
     assert Orangeade.Generator.Binary.__info__(:functions) == [
+             stream: 0,
              stream: 1
            ]
 
     assert Orangeade.Generator.Integer.__info__(:functions) == [
+             stream: 0,
              stream: 1
            ]
 
     assert Orangeade.Generator.Float.__info__(:functions) == [
+             stream: 0,
              stream: 1
            ]
 
@@ -47,6 +53,9 @@ defmodule OrangeadeTest do
 
     assert Orangeade.Generator.Term.__info__(:functions) == [
              stream: 0
+           ]
+    assert Orangeade.Generator.List.__info__(:functions) == [
+             stream: 1
            ]
   end
 end

@@ -1,4 +1,4 @@
-defmodule PrintableASCIICharlistTest do
+defmodule Orangeade.Generator.PrintableASCIICharlistTest do
   use ExUnit.Case
   alias Orangeade.Generator.PrintableASCIICharlist
 

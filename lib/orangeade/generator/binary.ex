@@ -6,6 +6,29 @@ defmodule Orangeade.Generator.Binary do
   alias Orangeade.Generator.BoundNatural
 
   @doc """
+  Creates a stream of binaries of default byte size limit 8.
+
+  ## Examples
+
+      iex(1)> s = Orangeade.Generator.Binary.stream()
+      [<<1>> | #Function<0.118517171/0 in Orangeade.Generator.Binary.do_stream/1>]
+
+      iex(2)> Caffeine.Stream.take(s, 5)
+      [
+        <<1>>,
+        <<124, 27, 14, 197>>,
+        <<240, 127, 162>>,
+        <<201, 164, 35, 118, 13, 152>>,
+        <<7, 138, 145, 204, 43>>
+      ]
+
+  """
+  @spec stream() :: Caffeine.Stream.t()
+  def stream do
+    stream(byte_size_limit: 8)
+  end
+
+  @doc """
   Given a binary byte size limit creates a stream of binaries.
 
   ## Examples

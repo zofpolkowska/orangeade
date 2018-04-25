@@ -2,7 +2,7 @@ defmodule Orangeade.Generator.TupleTest do
   use ExUnit.Case
   test "tuple generator should return tuples" do
     a = Orangeade.Generator.Logical.stream()
-    b = Orangeade.Generator.PrintableASCIICharacter.stream() 
+    b = Orangeade.Generator.BigInteger.stream() 
 
     t = Orangeade.Generator.Tuple.stream(args: [a,b])
 

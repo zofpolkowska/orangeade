@@ -2,7 +2,7 @@ defmodule Orangeade.Generator.MapTest do
   use ExUnit.Case
   test "map generator should return maps" do
     k = Orangeade.Generator.BoundNatural.stream(limit: 20)
-    v = Orangeade.Generator.PrintableASCIICharacter.stream()
+    v = Orangeade.Generator.Logical.stream()
 
     m = Orangeade.Generator.Map.stream(keys: k, values: v, limit: 10)
 

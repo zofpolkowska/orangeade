@@ -1,7 +1,7 @@
 defmodule Orangeade.Generator.FunctionTest do
   use ExUnit.Case
   test "function generator should return functions" do
-    b = Orangeade.Generator.PrintableASCIICharacter.stream() 
+    b = Orangeade.Generator.Logical.stream() 
 
     s = Orangeade.Generator.Function.stream(arity: 1, return: b)  
 

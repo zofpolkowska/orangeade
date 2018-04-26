@@ -1,48 +1,36 @@
 defmodule Orangeade.Generator.Tuple do
-  @moduledoc"""
-  Provides a function to generate a stream of tuples with defined values
+  @moduledoc """
+  Provides a function for creating a stream of tuples.
   """
 
-  @doc"""
-  Generates a stream of tuples from the given arguments
-  # Example
-  iex> a = Orangeade.Generator.Logical.stream()                
-      [false | #Function<1.23635164/0 in Caffeine.Stream.map/2>]
-  iex> b = Orangeade.Generator.PrintableASCIICharacter.stream()
-      [33 | #Function<1.23635164/0 in Caffeine.Stream.map/2>]
-  iex> c = Orangeade.Generator.BoundNatural.stream(limit: 13)  
-      [1 | #Function<1.23635164/0 in Caffeine.Stream.map/2>]
-  iex> s = Orangeade.Generator.Tuple.stream(args: [a,b,c])     
-      [
-        {false, '!', 1} |
-        #Function<0.103631357/0 in Orangeade.Generator.Tuple.stream/1>
-      ]
-  iex> Caffeine.Stream.take(s, 5)                         
-      [{false, '!', 1}, {false, 'h', 3}, {nil, 'e', 0}, {nil, '@', 5}, {nil, 'E', 3}]
-  """
+  @doc """
+  Given a list with type streams creates a stream of tuples containing
+  consecutive elements of these streams. Length of tuple is the same as number
+  of given streams.
 
-  @spec stream([args: list(Caffeine.Stream.t())]) :: Caffeine.Stream.t()
-  
-  def stream(args: l) do
-    {h, t} = parts(l, [], [])
+  ## Examples
+
+      iex(1)> s = Orangeade.Generator.Tuple.stream([Orangeade.Generator.Term.stream,
+      Orangeade.Generator.Integer.stream])
+      [{'!', -1} | #Function<0.52196285/0 in Orangeade.Generator.Tuple.stream/1>]
+
+      iex(2)> Caffeine.Stream.take(s, 10) 
+      [{'!', -1}, {<<1>>, 56412}, {"!", -11419}, {-0.99999, 29710}, {-1, -95269}]
+
+  """
+  @spec stream(list(Caffeine.Stream.t())) :: Caffeine.Stream.t()
+  def stream(stream_list) do
+    {tuple_elements, next_tuple_elements} = drain_streams(stream_list)
+
     rest = fn ->
-      stream(args: t) end
-    
-    Caffeine.Stream.construct(List.to_tuple(h), rest)
-  end
-
-  defp parts([], heads, tails), do: {heads, Enum.reverse(tails)}
-  defp parts([h|t], heads, tails) do
-    parts(t, [fst(h)| heads], [Caffeine.Stream.tail(h)|tails])
-  end
-
-  defp fst(s) do
-    e = Caffeine.Stream.take(s, 1)
-    cond do
-      List.ascii_printable?(e) ->
-	e
-      true ->
-	hd(e)
+      stream(next_tuple_elements)
     end
+
+    Caffeine.Stream.construct(List.to_tuple(tuple_elements), rest)
+  end
+
+  defp drain_streams(stream_list) do
+    {Enum.map(stream_list, &Caffeine.Stream.head/1),
+     Enum.map(stream_list, &Caffeine.Stream.tail/1)}
   end
 end

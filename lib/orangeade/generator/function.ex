@@ -1,9 +1,9 @@
 defmodule Orangeade.Generator.Function do
-  @moduledoc"""
+  @moduledoc """
   Provides a function to generate a stream of functions with defined return values and arity
   """
 
-  @doc"""
+  @doc """
   Generates a stream of functions from the given arguments and defined arity
   # Example
   iex> a = Orangeade.Generator.Logical.stream()                
@@ -28,42 +28,53 @@ defmodule Orangeade.Generator.Function do
       '!'
 
   """
-  
-  @spec stream([arity: non_neg_integer, return: Caffeine.Stream.t()]) :: Caffeine.Stream.t()
-  
+
+  @spec stream(arity: non_neg_integer, return: Caffeine.Stream.t()) :: Caffeine.Stream.t()
+
   def stream(arity: a, return: r) do
     function = f(a, fst(r))
+
     rest = fn ->
-      stream(arity: a, return: Caffeine.Stream.tail(r)) end
+      stream(arity: a, return: Caffeine.Stream.tail(r))
+    end
+
     Caffeine.Stream.construct(function, rest)
   end
 
   defp f(arity, return) do
     case arity do
       0 ->
-	fn -> return end
+        fn -> return end
+
       1 ->
-	fn _x -> return end
+        fn _x -> return end
+
       2 ->
-	fn _x, _y -> return end
+        fn _x, _y -> return end
+
       3 ->
-	fn _x, _y, _z -> return end
+        fn _x, _y, _z -> return end
+
       4 ->
-	fn _w, _x, _y, _z -> return end
+        fn _w, _x, _y, _z -> return end
+
       5 ->
-	fn _u, _w, _x, _y, _z -> return end
+        fn _u, _w, _x, _y, _z -> return end
+
       _ ->
-	fn -> "to big number of arguments" end
+        fn -> "to big number of arguments" end
     end
   end
 
   defp fst(s) do
     e = Caffeine.Stream.take(s, 1)
+
     cond do
       List.ascii_printable?(e) ->
-	e
+        e
+
       true ->
-	hd(e)
+        hd(e)
     end
   end
 end

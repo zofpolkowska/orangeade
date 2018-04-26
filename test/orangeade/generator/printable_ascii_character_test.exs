@@ -1,4 +1,4 @@
-defmodule PrintableASCIICharacterTest do
+defmodule Orangeade.Generator.PrintableASCIICharacterTest do
   use ExUnit.Case
   alias Orangeade.Generator.PrintableASCIICharacter
 

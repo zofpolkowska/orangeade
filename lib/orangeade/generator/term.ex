@@ -12,6 +12,8 @@ defmodule Orangeade.Generator.Term do
   alias Orangeade.Generator.Integer
   alias Orangeade.Generator.Float
   alias Orangeade.Generator.BooleanAndNil
+  alias Orangeade.Generator.Tuple
+  alias Orangeade.Generator.List, as: ListGen
 
   @doc """
   Creates a stream of terms.
@@ -38,17 +40,19 @@ defmodule Orangeade.Generator.Term do
   """
   @spec stream() :: Caffeine.Stream.t()
   def stream do
-    number_of_generators = 8
+    number_of_generators = 10
 
     streams_list = [
-      PrintableASCIICharacter.stream(),
-      PrintableASCIICharlist.stream(),
       ASCIIAtom.stream(),
       ASCIIString.stream(),
       Binary.stream(),
-      Integer.stream(),
+      BooleanAndNil.stream(),
       Float.stream(),
-      BooleanAndNil.stream()
+      Integer.stream(),
+      ListGen.stream(fill: Float.stream()),
+      PrintableASCIICharacter.stream(),
+      PrintableASCIICharlist.stream(),
+      Tuple.stream([ASCIIAtom.stream(), Integer.stream()])
     ]
 
     do_stream(

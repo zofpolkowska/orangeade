@@ -17,6 +17,7 @@ defmodule Orangeade.Generator.ListTest do
     res = Caffeine.Stream.take(lists, 1_000)
 
     assert Enum.all?(res, fn e ->
-      Enum.all?(e, &is_integer/1) end)
+             Enum.all?(e, &is_integer/1)
+           end)
   end
 end

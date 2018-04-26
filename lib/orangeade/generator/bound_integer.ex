@@ -2,7 +2,7 @@ defmodule Orangeade.Generator.BoundInteger do
   @moduledoc """
   Provides a function to generate a limited stream of integers
   """
-  
+
   @doc """
   Generates a limited stream of integers
 
@@ -13,9 +13,9 @@ defmodule Orangeade.Generator.BoundInteger do
   [1, -12, 19, -110, 69, -120, 183, -18, 129, -44, 131, -54, 93, -48]
 
   """
-  
-  @spec stream([lower: integer, upper: integer]) :: Caffeine.Stream.t()
-  
+
+  @spec stream(lower: integer, upper: integer) :: Caffeine.Stream.t()
+
   def stream(lower: i, upper: j) do
     l = Orangeade.Generator.BoundNatural.stream(limit: abs(i))
     u = Orangeade.Generator.BoundNatural.stream(limit: j)
@@ -27,20 +27,19 @@ defmodule Orangeade.Generator.BoundInteger do
     li = Caffeine.Stream.head(l)
     ui = Caffeine.Stream.head(u)
     ei = Caffeine.Stream.head(e)
-    Caffeine.Stream.construct(f(li,ui,ei), fn ->
-      stream(Caffeine.Stream.tail(l),
-	Caffeine.Stream.tail(u),
-	Caffeine.Stream.tail(e)) end)
+
+    Caffeine.Stream.construct(f(li, ui, ei), fn ->
+      stream(Caffeine.Stream.tail(l), Caffeine.Stream.tail(u), Caffeine.Stream.tail(e))
+    end)
   end
 
   defp f(li, ui, ei) do
     cond do
       ei === 0 ->
-	ui *(-1)
+        ui * -1
+
       ei === 1 ->
-	li
+        li
     end
   end
-  
 end
-

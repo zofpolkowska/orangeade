@@ -1,8 +1,8 @@
 defmodule Orangeade.Generator.Logical do
   @moduledoc """
   A boolean values generator {:true, :false, :nil}
-  
-  
+
+
   ## Examples
 
       iex(1)> Caffeine.Stream.take(
@@ -16,21 +16,24 @@ defmodule Orangeade.Generator.Logical do
   """
 
   @spec stream() :: Caffeine.Stream.t()
-  
+
   def stream do
     alias Orangeade.Generator.BoundNatural, as: BoundNatural
+
     BoundNatural.stream(limit: 3)
-      |> Caffeine.Stream.map(&bool/1)
+    |> Caffeine.Stream.map(&bool/1)
+  end
+
+  defp bool(e) do
+    cond do
+      e === 0 ->
+        true
+
+      e === 1 ->
+        false
+
+      e === 2 ->
+        nil
     end
-    
-    defp bool(e) do
-      cond do
-        e === 0 ->
-          :true
-        e === 1 ->
-          :false
-        e === 2 ->
-          :nil
-      end
-    end
+  end
 end

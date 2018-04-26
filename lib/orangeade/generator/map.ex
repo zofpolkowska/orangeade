@@ -1,9 +1,9 @@
 defmodule Orangeade.Generator.Map do
-  @moduledoc"""
+  @moduledoc """
   Provides a function to generate maps
   """
 
-  @doc"""
+  @doc """
   Generates maps from values given as arguments and of limited lengths
   # Example
   iex> s = Orangeade.Generator.Map.stream(keys:             
@@ -20,8 +20,9 @@ defmodule Orangeade.Generator.Map do
       ]
   """
 
-  @spec stream([keys: Caffeine.Stream.t(), values: Caffeine.Stream.t(), limit: non_neg_integer]) :: Caffeine.Stream.t()
-  
+  @spec stream(keys: Caffeine.Stream.t(), values: Caffeine.Stream.t(), limit: non_neg_integer) ::
+          Caffeine.Stream.t()
+
   def stream(keys: k, values: v, limit: l) do
     stream(k, v, Orangeade.Generator.BoundNatural.stream(limit: l))
   end
@@ -30,23 +31,22 @@ defmodule Orangeade.Generator.Map do
     l = Caffeine.Stream.head(lens)
     {_k, ktail} = split(keys, l)
     {_v, vtail} = split(values, l)
-    tuples = Caffeine.Stream.take(
-      Orangeade.Generator.Tuple.stream(args: [keys, values]),
-      l)
+    tuples = Caffeine.Stream.take(Orangeade.Generator.Tuple.stream([keys, values]), l)
     h = Enum.into(tuples, %{})
-    
+
     rest = fn ->
-      stream(ktail, vtail, Caffeine.Stream.tail(lens)) end
+      stream(ktail, vtail, Caffeine.Stream.tail(lens))
+    end
 
     Caffeine.Stream.construct(h, rest)
   end
 
   defp split(args, len) do
-    {Caffeine.Stream.take(args, len),
-     rest(args, len)}
+    {Caffeine.Stream.take(args, len), rest(args, len)}
   end
-    
+
   defp rest(args, 0), do: args
+
   defp rest(args, len) do
     rest(Caffeine.Stream.tail(args), len - 1)
   end

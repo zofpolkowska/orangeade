@@ -6,15 +6,33 @@ defmodule Orangeade.Generator.Integer do
   alias Orangeade.Generator.BoundNatural
 
   @doc """
+  Creates a stream of integers between limit and negative limit which is default
+  value 100_000
+
+  ## Examples
+
+      iex(1)> s = Orangeade.Generator.Integer.stream()
+      [-1 | #Function<0.132496296/0 in Orangeade.Generator.Integer.do_stream/1>]
+
+      iex(2)> Caffeine.Stream.take(s, 10)
+      [-1, 56412, -11419, 29710, -95269, 93520, -13983, 47618, -21929, 83044]
+
+  """
+  @spec stream() :: Caffeine.Stream.t()
+  def stream() do
+    stream(limit: 100_000)
+  end
+
+  @doc """
   Given a limit creates a stream of integers between limit and negative limit.
 
   ## Examples
 
-      iex(1)> s = Orangeade.Generator.Integer.stream(limit: 1000)
+      iex(1)> s = Orangeade.Generator.Integer.stream(limit: 30)
       [-1 | #Function<0.132496296/0 in Orangeade.Generator.Integer.do_stream/1>]
 
       iex(2)> Caffeine.Stream.take(s, 10)
-      [-1, 412, -419, 710, -269, 520, -983, 618, -929, 44]
+      [-1, 22, -29, 20, -29, 20, -13, 18, -19, 14]
 
   """
   @spec stream(limit: non_neg_integer) :: Caffeine.Stream.t()

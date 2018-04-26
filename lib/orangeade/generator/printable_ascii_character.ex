@@ -7,7 +7,7 @@ defmodule Orangeade.Generator.PrintableASCIICharacter do
 
   @doc """
   Creates a stream of ASCII characters.
-  
+
   ## Examples
 
       iex(1)> s = Orangeade.Generator.PrintableASCIICharacter.stream()
@@ -19,12 +19,11 @@ defmodule Orangeade.Generator.PrintableASCIICharacter do
   """
   @spec stream() :: Caffeine.Stream.t()
   def stream do
-    Caffeine.Stream.map(BoundNatural.stream(limit: length()),
-      &to_number_between_bounds/1)
+    Caffeine.Stream.map(BoundNatural.stream(limit: length()), &to_number_between_bounds/1)
   end
 
   defp to_number_between_bounds(n) do
-    lower_bound() + n 
+    lower_bound() + n
   end
 
   defp length do
@@ -39,4 +38,3 @@ defmodule Orangeade.Generator.PrintableASCIICharacter do
     ?~
   end
 end
-

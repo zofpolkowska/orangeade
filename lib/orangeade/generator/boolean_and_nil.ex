@@ -7,7 +7,7 @@ defmodule Orangeade.Generator.BooleanAndNil do
 
   @doc """
   Creates a stream of booleans and nils.
-  
+
   ## Examples
 
       iex(1)> s = Orangeade.Generator.BooleanAndNil.stream()

@@ -8,7 +8,7 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
 
   @doc """
   Creates a stream of ASCII charlists.
-  
+
   ## Examples
 
       iex(1)> s = Orangeade.Generator.PrintableASCIICharlist.stream(max_word_length: 30)
@@ -22,30 +22,36 @@ defmodule Orangeade.Generator.PrintableASCIICharlist do
       '=^IVK>#<;<mBar#:CnC', '0m\\?6GLeXs$%:c']
 
   """
-  @spec stream([max_word_length: non_neg_integer]) :: Caffeine.Stream.t()
+  @spec stream(max_word_length: non_neg_integer) :: Caffeine.Stream.t()
   def stream(max_word_length: l) do
-    do_stream(length: BoundNatural.stream(limit: l),
-      fill: PrintableASCIICharacter.stream())
+    do_stream(
+      length: BoundNatural.stream(limit: l),
+      fill: PrintableASCIICharacter.stream()
+    )
   end
 
   defp do_stream(length: length_stream, fill: charlist_stream) do
     {head, reduced_charlist_stream} =
       drain_chars(Caffeine.Stream.head(length_stream), charlist_stream)
+
     rest = fn ->
-      do_stream(length: Caffeine.Stream.tail(length_stream),
-        fill: reduced_charlist_stream)
+      do_stream(
+        length: Caffeine.Stream.tail(length_stream),
+        fill: reduced_charlist_stream
+      )
     end
+
     Caffeine.Stream.construct(head, rest)
   end
 
   defp drain_chars(n, charlist_stream) do
-    {Caffeine.Stream.take(charlist_stream, n),
-     reduce_stream(n, charlist_stream)}
+    {Caffeine.Stream.take(charlist_stream, n), reduce_stream(n, charlist_stream)}
   end
 
   defp reduce_stream(0, reduced_stream) do
     reduced_stream
   end
+
   defp reduce_stream(i, stream) do
     reduce_stream(i - 1, Caffeine.Stream.tail(stream))
   end

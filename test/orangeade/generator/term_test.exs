@@ -15,7 +15,9 @@ defmodule Orangeade.Generator.TermTest do
       Enum.any?(list_of_elements, &is_integer/1),
       Enum.any?(list_of_elements, &is_float/1),
       Enum.any?(list_of_elements, &is_boolean/1),
-      Enum.any?(list_of_elements, &is_nil/1)
+      Enum.any?(list_of_elements, &is_nil/1),
+      Enum.any?(list_of_elements, &is_tuple/1),
+      Enum.any?(list_of_elements, &is_list/1)
     ]
 
     assert Enum.all?(list_of_conditions)

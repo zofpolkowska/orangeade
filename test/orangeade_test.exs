@@ -5,17 +5,25 @@ defmodule OrangeadeTest do
     assert Orangeade.__info__(:functions) == [
              ascii_atom: 0,
              ascii_string: 0,
+             big_integer: 1,
              big_natural: 0,
+             big_natural_instance: 0,
              binary: 0,
              boolean_and_nil: 0,
+             bound_integer: 1,
              bound_natural: 1,
              float: 0,
+             function: 1,
              integer: 0,
+             list: 1,
+             logical: 0,
+             map: 1,
              printable_ascii_character: 0,
              printable_ascii_charlist: 0,
              start: 2,
              stop: 1,
-             term: 0
+             term: 0,
+             tuple: 1
            ]
 
     assert Orangeade.Generator.BigNatural.__info__(:functions) == [

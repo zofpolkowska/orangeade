@@ -5,7 +5,7 @@ defmodule OrangeadeTest do
     assert Orangeade.__info__(:functions) == [
              ascii_atom: 0,
              ascii_string: 0,
-             big_integer: 1,
+             big_integer: 0,
              big_natural: 0,
              big_natural_instance: 0,
              binary: 0,

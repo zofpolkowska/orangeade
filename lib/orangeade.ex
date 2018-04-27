@@ -13,7 +13,7 @@ defmodule Orangeade do
 
   defdelegate ascii_atom(), to: Gen.ASCIIAtom, as: :stream
   defdelegate ascii_string(), to: Gen.ASCIIString, as: :stream
-  defdelegate big_integer(opts), to: Gen.BigInteger, as: :stream
+  defdelegate big_integer(), to: Gen.BigInteger, as: :stream
   defdelegate big_natural(), to: Gen.BigNatural, as: :stream
   defdelegate big_natural_instance(), to: Gen.BigNatural, as: :instance
   defdelegate binary(), to: Gen.Binary, as: :stream

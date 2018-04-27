@@ -1,8 +1,10 @@
 defmodule Orangeade.Generator.BoundNatural do
   def stream(limit: i) do
     alias Psi.LinearCongruentialGenerator, as: LCG
+    alias Orangeade.SeedState
 
-    s = LCG.stream(generator: Orangeade.Generator.BigNatural.instance(), seed: 1)
+    seed = SeedState.get_next()
+    s = LCG.stream(generator: Orangeade.Generator.BigNatural.instance(), seed: seed)
     Caffeine.Stream.map(s, limit(i))
   end
 

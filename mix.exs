@@ -13,6 +13,7 @@ defmodule Orangeade.MixProject do
 
   def application do
     [
+      mod: {Orangeade, []},
       extra_applications: [:logger]
     ]
   end

@@ -13,6 +13,8 @@ defmodule OrangeadeTest do
              integer: 0,
              printable_ascii_character: 0,
              printable_ascii_charlist: 0,
+             start: 2,
+             stop: 1,
              term: 0
            ]
 

@@ -1,32 +1,33 @@
 defmodule Orangeade do
+  use Application
+
   @moduledoc """
   A collection of data generators (like those seen in property-based testing)
   """
+
   alias Orangeade.Generator, as: Gen
 
-  defdelegate gen_ascii_atom_stream(), to: Gen.ASCIIAtom, as: :stream
-  defdelegate gen_ascii_atom_stream(opts), to: Gen.ASCIIAtom, as: :stream
-  defdelegate gen_ascii_string_stream(), to: Gen.ASCIIString, as: :stream
-  defdelegate gen_ascii_string_stream(opts), to: Gen.ASCIIString, as: :stream
-  defdelegate gen_big_integer_stream(), to: Gen.BigInteger, as: :stream
-  defdelegate gen_big_natural_stream(), to: Gen.BigNatural, as: :stream
-  defdelegate gen_big_natural_instance(), to: Gen.BigNatural, as: :instance
-  defdelegate gen_binary_stream(), to: Gen.Binary, as: :stream
-  defdelegate gen_binary_stream(opts), to: Gen.Binary, as: :stream
-  defdelegate gen_boolean_and_nil_stream(), to: Gen.BooleanAndNil, as: :stream
-  defdelegate gen_bound_integer_stream(opts), to: Gen.BoundInteger, as: :stream
-  defdelegate gen_bound_natural_stream(opts), to: Gen.BoundNatural, as: :stream
-  defdelegate gen_float_stream(), to: Gen.Float, as: :stream
-  defdelegate gen_float_stream(opts), to: Gen.Float, as: :stream
-  defdelegate gen_function_stream(opts), to: Gen.Function, as: :stream
-  defdelegate gen_integer_stream(), to: Gen.Integer, as: :stream
-  defdelegate gen_integer_stream(opts), to: Gen.Integer, as: :stream
-  defdelegate gen_list_stream(opts), to: Gen.List, as: :stream
-  defdelegate gen_logical_stream(), to: Gen.Logical, as: :stream
-  defdelegate gen_map_stream(opts), to: Gen.Map, as: :stream
-  defdelegate gen_printable_ascii_character_stream(), to: Gen.PrintableASCIICharacter, as: :stream
-  defdelegate gen_printable_ascii_charlist_stream(), to: Gen.PrintableASCIICharlist, as: :stream
-  defdelegate gen_printable_ascii_charlist_stream(opts), to: Gen.PrintableASCIICharlist, as: :stream
-  defdelegate gen_term_stream(), to: Gen.Term, as: :stream
-  defdelegate gen_tuple_stream(opts), to: Gen.Tuple, as: :stream
+  def start(_type, _args) do
+    Orangeade.Supervisor.start_link(1)
+  end
+
+  defdelegate ascii_atom(), to: Gen.ASCIIAtom, as: :stream
+  defdelegate ascii_string(), to: Gen.ASCIIString, as: :stream
+  defdelegate big_integer(opts), to: Gen.BigInteger, as: :stream
+  defdelegate big_natural(), to: Gen.BigNatural, as: :stream
+  defdelegate big_natural_instance(), to: Gen.BigNatural, as: :instance
+  defdelegate binary(), to: Gen.Binary, as: :stream
+  defdelegate boolean_and_nil(), to: Gen.BooleanAndNil, as: :stream
+  defdelegate bound_integer(opts), to: Gen.BoundInteger, as: :stream
+  defdelegate bound_natural(limit), to: Gen.BoundNatural, as: :stream
+  defdelegate float(), to: Gen.Float, as: :stream
+  defdelegate function(opts), to: Gen.Function, as: :stream
+  defdelegate integer(), to: Gen.Integer, as: :stream
+  defdelegate list(opts), to: Gen.List, as: :stream
+  defdelegate logical(), to: Gen.Logical, as: :stream
+  defdelegate map(opts), to: Gen.Map, as: :stream
+  defdelegate printable_ascii_character(), to: Gen.PrintableASCIICharacter, as: :stream
+  defdelegate printable_ascii_charlist(), to: Gen.PrintableASCIICharlist, as: :stream
+  defdelegate term(), to: Gen.Term, as: :stream
+  defdelegate tuple(stream_list), to: Gen.Tuple, as: :stream
 end

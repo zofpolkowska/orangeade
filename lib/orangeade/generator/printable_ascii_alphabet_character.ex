@@ -1,4 +1,4 @@
-defmodule Orangeade.Generator.PrintableASCIIAphabetCharacter do
+defmodule Orangeade.Generator.PrintableASCIIAlphabetCharacter do
   @moduledoc """
   Provides a function for creating a stream of ASCII alphabet characters.
   """
@@ -14,7 +14,7 @@ defmodule Orangeade.Generator.PrintableASCIIAphabetCharacter do
     # Example
 
     iex> Caffeine.Stream.take(                                                 
-    ...> Orangeade.Generator.PrintableASCIIAphabetCharacter.Majuscule.stream(),
+    ...> Orangeade.Generator.PrintableASCIIAlphabetCharacter.Majuscule.stream(),
     ...> 50)                                                                  
     'XONEWENODTDIXCWMBIXFDMEPEUYHOIEWBCGVYTUVVYDQSHEMLB'
 
@@ -47,7 +47,7 @@ defmodule Orangeade.Generator.PrintableASCIIAphabetCharacter do
   
     # Example
     iex> Caffeine.Stream.take(                                                 
-    ...> Orangeade.Generator.PrintableASCIIAphabetCharacter.Minuscule.stream(),
+    ...> Orangeade.Generator.PrintableASCIIAlphabetCharacter.Minuscule.stream(),
     ...> 50)
     'onewenodtdixcwmbixfdmepeuyhoiewbcgvytuvvydqshemlbn'
 
@@ -80,7 +80,7 @@ defmodule Orangeade.Generator.PrintableASCIIAphabetCharacter do
   
   # Example
   iex> Caffeine.Stream.take(                                             
-  ...> Orangeade.Generator.PrintableASCIIAphabetCharacter.stream(),      
+  ...> Orangeade.Generator.PrintableASCIIAlphabetCharacter.stream(),      
   ...> 50)                                                               
   'NeWeNoDtDiXcWmBiXfDmEpEuYhOiEwBcGvYtUvVyDqShEmLbNc'
 

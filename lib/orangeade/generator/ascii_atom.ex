@@ -7,20 +7,19 @@ defmodule Orangeade.Generator.ASCIIAtom do
   alias Orangeade.Generator.BoundNatural
   
   @doc """
-  Creates a stream of ascii atoms of max default length 10.
+  Creates a stream of ascii atoms of max default length 6.
 
   ## Examples
 
-  iex> Caffeine.Stream.take(                     
-  ...> Orangeade.Generator.ASCIIAtom.stream(),   
+  iex> Caffeine.Stream.take(                 
+  ...> Orangeade.Generator.ASCIIAtom.stream(),
   ...> 10)
-  [:tmb, :segtesiutk, :x, :voyavicrif, :v, :alkx, :donewenox, :xibmwcxidt, :pemdf,
-  :ue]
+ [:seg, :icrifx, :v, :voya, :kxv, :enoxal, :new, :xidtdo, :ibmwc, :pemdfx]
 
   """
   @spec stream() :: Caffeine.Stream.t()
   def stream do
-    stream(max_word_length: 10)
+    stream(max_word_length: 6)
   end
 
   @doc """
@@ -28,12 +27,11 @@ defmodule Orangeade.Generator.ASCIIAtom do
 
   ## Examples
 
-  iex> Caffeine.Stream.take(                  
-  ...> Orangeade.Generator.ASCIIAtom.stream(max_word_length: 20),
-  ...> 10)
-  [:segtesiutkt, :oyavicrifx, :v, :lkxv, :ibmwcxidtdonewenoxa, :hyuepemdfx,
-  :bweio, :sqdyvvutyvgc, :oasdodrbcnblmeh, :vrssfhhjsvlcbn]
-
+  iex> Caffeine.Stream.take(                                     
+  ...> Orangeade.Generator.ASCIIAtom.stream(max_word_length: 10),
+  ...> 10)                                                       
+  [:oyavicrif, :oxalkxvv, :wen, :done, :mwcxidt, :mdfxib, :yuepe, :yvgcbweioh,
+  :qdyvvut, :hs]
 
   """
   @spec stream(max_word_length: non_neg_integer) :: Caffeine.Stream.t()

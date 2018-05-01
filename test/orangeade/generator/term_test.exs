@@ -5,7 +5,7 @@ defmodule Orangeade.Generator.TermTest do
   test "Check if there are different data types in first 100 generated elements" do
     list_of_elements =
       Term.stream()
-      |> Caffeine.Stream.take(100)
+      |> Caffeine.Stream.take(200)
 
     list_of_conditions = [
       Enum.any?(list_of_elements, &is_negative/1),

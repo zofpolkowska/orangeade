@@ -3,23 +3,24 @@ defmodule Orangeade.Generator.ASCIIAtom do
   Provides a function for creating a stream of ascii atoms.
   """
 
-  alias Orangeade.Generator.PrintableASCIIAlphabetCharacter.Minuscule
-  alias Orangeade.Generator.BoundNatural
-  
+  alias Orangeade.Generator.ASCIIString
+
   @doc """
-  Creates a stream of ascii atoms of max default length 6.
+  Creates a stream of ascii atoms of max default length 10.
 
   ## Examples
 
-  iex> Caffeine.Stream.take(                 
-  ...> Orangeade.Generator.ASCIIAtom.stream(),
-  ...> 10)
- [:seg, :icrifx, :v, :voya, :kxv, :enoxal, :new, :xidtdo, :ibmwc, :pemdfx]
+      iex(1)> s = Orangeade.Generator.ASCIIAtom.stream(max_word_length: 10)
+      [:! | #Function<1.23635164/0 in Caffeine.Stream.map/2>]
+
+      iex(2)> Caffeine.Stream.take(s, 10)
+      [:!, :he, :"@E@?l{$w@", :"", :"7$O:!2[:-", :"", :LIB, :"G@[&!^7:", :"gp]f% W4S",
+      :"8qjg"]
 
   """
   @spec stream() :: Caffeine.Stream.t()
   def stream do
-    stream(max_word_length: 6)
+    stream(max_word_length: 10)
   end
 
   @doc """
@@ -27,37 +28,16 @@ defmodule Orangeade.Generator.ASCIIAtom do
 
   ## Examples
 
-  iex> Caffeine.Stream.take(                                     
-  ...> Orangeade.Generator.ASCIIAtom.stream(max_word_length: 10),
-  ...> 10)                                                       
-  [:oyavicrif, :oxalkxvv, :wen, :done, :mwcxidt, :mdfxib, :yuepe, :yvgcbweioh,
-  :qdyvvut, :hs]
+      iex(1)> s = Orangeade.Generator.ASCIIAtom.stream(max_word_length: 20)
+      [:! | #Function<1.23635164/0 in Caffeine.Stream.map/2>]
+
+      iex(2)> Caffeine.Stream.take(s, 10)
+      [:!, :"he@E@?l{$w@7", :"$O:!2[:-LIBG@[&!^7:", :"gp]f% W4S8", :"qjgve,s@#", :"",
+      :"$}v", :"ul?B;(GLGZ_J9Ha>!B", :"%8#T]6q^i", :"D[hY"]
 
   """
   @spec stream(max_word_length: non_neg_integer) :: Caffeine.Stream.t()
   def stream(max_word_length: l) do
-    alphabet = Minuscule.stream()
-    lengths = BoundNatural.stream(limit: l)
-    stream(alphabet, lengths)
+    Caffeine.Stream.map(ASCIIString.stream(max_word_length: l), &String.to_atom/1)
   end
-
-  defp stream(alphabet, lengths) do
-    {word, atail} = split(alphabet, Caffeine.Stream.head(lengths))
-    rest = fn ->
-      stream(atail, Caffeine.Stream.tail(lengths)) end
-    Caffeine.Stream.construct(word, rest)
-  end
-
-  defp split(alphabet, length) do
-    split([], length + 1, alphabet)
-  end
-
-  defp split(word, 0, alphabet) do
-    {List.to_atom(word), alphabet}
-  end
-
-  defp split(word, n, alphabet) do
-    split([Caffeine.Stream.head(alphabet)|word], n - 1, Caffeine.Stream.tail(alphabet))
-  end
-  
 end
